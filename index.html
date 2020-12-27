@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-曹人第一个" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/12/27/%E6%9B%B9%E4%BA%BA%E7%AC%AC%E4%B8%80%E4%B8%AA/" class="article-date">
+  <time class="dt-published" datetime="2020-12-27T04:54:47.000Z" itemprop="datePublished">2020-12-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2020/12/27/%E6%9B%B9%E4%BA%BA%E7%AC%AC%E4%B8%80%E4%B8%AA/">曹人第一个</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>@<a href="%E5%B9%B6%E6%9F%A5%E9%9B%86">TOC</a></p>
+<h2 id="并查集是啥子？"><a href="#并查集是啥子？" class="headerlink" title="并查集是啥子？"></a>并查集是啥子？</h2><ul>
+<li>并查集支持查找一个元素所属的集合，还可以将两个不在一个集合的元素合并。</li>
+<li>举个栗子，你有家谱去看看到底是不是亲戚。当你的家谱非常庞大，是个大湾子，但是你可以使用并查集来看看你们是不是一个祖宗。</li>
+</ul>
+<h2 id="并查集需要那几样东西？"><a href="#并查集需要那几样东西？" class="headerlink" title="并查集需要那几样东西？"></a>并查集需要那几样东西？</h2><ol>
+<li>需要一个数组pre[n]。</li>
+<li>void join(int m,int n)函数，也就是合并函数。</li>
+<li>int find(itn x)函数。</li>
+</ol>
+<h3 id="数组pre-n"><a href="#数组pre-n" class="headerlink" title="数组pre[n]"></a>数组pre[n]</h3><p>pre[n]的具体意思pre[n]的值表示n的上头，<br>当<strong>pre[4]=8,表示8是4他爸妈。</strong><br>当一开始，我们没有查家谱，我们就认定自己是自己的祖宗<strong>pre[i]=i</strong></p>
+<h3 id="int-find-int-x-函数。"><a href="#int-find-int-x-函数。" class="headerlink" title="int find(int x)函数。"></a>int find(int x)函数。</h3><p><strong>返回值</strong> ：find(int x)函数返回自己的祖宗。<br>就是往一直往自己上头找，知道发现<strong>pre[i]==i</strong><br>表示你找到祖宗了，就返回祖宗。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> n)</span><span class="comment">//找老大</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> root,son,temp;</span><br><span class="line">	root=n;</span><br><span class="line">	son=n;</span><br><span class="line">	<span class="keyword">while</span>(root!=pre[root])</span><br><span class="line">		root=pre[root];</span><br><span class="line">	<span class="keyword">return</span> root;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个算法还可以进行一下简化。<br>具体</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> n)</span><span class="comment">//找祖宗</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> root,son,temp;</span><br><span class="line">	root=n;</span><br><span class="line">	son=n;</span><br><span class="line">	<span class="keyword">while</span>(root!=pre[root])</span><br><span class="line">		root=pre[root];</span><br><span class="line">	<span class="keyword">while</span>(son!=root)<span class="comment">//压缩一下，直接将所有的人</span></span><br><span class="line">	                <span class="comment">//直接指向他的祖宗。</span></span><br><span class="line">	&#123;</span><br><span class="line">		temp=pre[son];</span><br><span class="line">		pre[son]=root;</span><br><span class="line">		son=temp;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> root;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="void-join-int-m，int-n-函数"><a href="#void-join-int-m，int-n-函数" class="headerlink" title="void join(int m，int n)函数"></a>void join(int m，int n)函数</h3><p>这个函数用于将m和n联合起来，表示他们有一个祖宗。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">join</span><span class="params">(<span class="keyword">int</span> m,<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i,j;</span><br><span class="line">	i=find(m);<span class="comment">//找到i的祖宗</span></span><br><span class="line">	j=find(n);</span><br><span class="line">	<span class="keyword">if</span>(i!=j)<span class="comment">//两个祖宗相互比较</span></span><br><span class="line">		pre[i]=j;<span class="comment">//不同就把一个祖宗归到另一个祖宗，</span></span><br><span class="line">		         <span class="comment">//也就是认别人为祖宗。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最后出个题。</p>
+<ol>
+<li>先输入两个数，</li>
+</ol>
+<ul>
+<li>一个是家谱中查出有多少个关系，</li>
+<li>一个是有多少人</li>
+</ul>
+<ol start="2">
+<li>后面一次输入家谱中查出的关系</li>
+<li>最后输出有多少个家族？</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> pre[<span class="number">100</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> root,son,temp;</span><br><span class="line">	root=n;</span><br><span class="line">	son=n;</span><br><span class="line">	<span class="keyword">while</span>(root!=pre[root])</span><br><span class="line">		root=pre[root];</span><br><span class="line">	<span class="keyword">while</span>(son!=root)</span><br><span class="line">	&#123;</span><br><span class="line">		temp=pre[son];</span><br><span class="line">		pre[son]=root;</span><br><span class="line">		son=temp;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> root;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">join</span><span class="params">(<span class="keyword">int</span> m,<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i,j;</span><br><span class="line">	i=find(m);</span><br><span class="line">	j=find(n);</span><br><span class="line">	<span class="keyword">if</span>(i!=j)</span><br><span class="line">		pre[i]=j;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> m,n,a,b,k;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;m&gt;&gt;n;</span><br><span class="line">	k=n;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">		pre[i]=i;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;m;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;a&gt;&gt;b;</span><br><span class="line">		<span class="keyword">if</span>(find(a)!=find(b))</span><br><span class="line">			k--;<span class="comment">//找到一个，认一个祖宗，也就是合并一个家族。</span></span><br><span class="line">		join(a,b);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;k<span class="number">-1</span>&lt;&lt;<span class="built_in">endl</span>;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/12/27/%E6%9B%B9%E4%BA%BA%E7%AC%AC%E4%B8%80%E4%B8%AA/" data-id="ckj6ny3b000016gysdlzw0tx3" data-title="曹人第一个" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/12/27/hello-world/" class="article-date">
+  <time class="dt-published" datetime="2020-12-27T04:33:15.382Z" itemprop="datePublished">2020-12-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2020/12/27/hello-world/">Hello World</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/12/27/hello-world/" data-id="ckj6ny3an00006gysel8xechd" data-title="Hello World" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/12/27/%E6%9B%B9%E4%BA%BA%E7%AC%AC%E4%B8%80%E4%B8%AA/">曹人第一个</a>
+          </li>
+        
+          <li>
+            <a href="/2020/12/27/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2020 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
