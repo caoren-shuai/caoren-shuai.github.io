@@ -152,6 +152,70 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-UTF-8和Unicode简述" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Unicode和UTF-8简述"><a href="#Unicode和UTF-8简述" class="headerlink" title="Unicode和UTF-8简述"></a>Unicode和UTF-8简述</h1><h2 id="ASCII"><a href="#ASCII" class="headerlink" title="ASCII"></a>ASCII</h2><pre><code>    由于计算机是美国人发明的，他们先用127个字符（大小写英文字母
+    加上一些符号）编码，用一个字节（256位）即可表示。</code></pre>
+<h2 id="GB2312"><a href="#GB2312" class="headerlink" title="GB2312"></a>GB2312</h2><pre><code>    要处理中文就必须加多字节数，把中文字符加进去。
+    中国制定GB2312编码，把中文加进去。</code></pre>
+<h2 id="Unicode"><a href="#Unicode" class="headerlink" title="Unicode"></a>Unicode</h2><pre><code>    由于世界各国有不同的符号，各自有各自的编码标准，很难
+    不出现冲突，多国语言一起使用就会出先乱码。
+    于是Unicode出现了，它把所有的语言都统一到一套编码里面。
+    这样就不会出现乱码现象。最常用的是2个字节，出现生僻的
+    字符需要4个字节。</code></pre>
+<h2 id="UTF-8"><a href="#UTF-8" class="headerlink" title="UTF-8"></a>UTF-8</h2><pre><code>    由于Unicode写英文的时候占用的空间是ASCII的两倍。
+    浪费空间，于是UTF-8(可变长编码),如其名，他的编码
+    字节数是可以变换的，一般是1~6个字节。英文一个字节
+    汉字3个字节。</code></pre>
+<h2 id="UTF-8和Unicode"><a href="#UTF-8和Unicode" class="headerlink" title="UTF-8和Unicode"></a>UTF-8和Unicode</h2><pre><code>    由于两个的特性，我们可以在内存中使用Unicode，当要
+    保存的时候使用UTF-8。通过两种编码的转换来实现。
+    像在记事本（Unicode编码）中，从文件（UTF-8编码）读取UTF-8的编码转化为Unicode
+    然后显示，当要存储的时候，再转换回去。</code></pre>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/12/29/UTF-8%E5%92%8CUnicode%E7%AE%80%E8%BF%B0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-寒假充能" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
