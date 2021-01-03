@@ -152,6 +152,73 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-数据结构堆" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>@<a href="%E5%A0%86%E7%9A%84%E5%A4%8D%E4%B9%A0">TOC</a></p>
+<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>今天写leetcode签到题，滑动窗口的最大值，菜鸡的我只会一种暴力法，不出所料，超时了，看了题解发现用大根堆的一种解法，感觉还不错，很容易理解，虽然说复杂度也很高（有更好的解法），但是还是想回顾一下以前没弄特别明白的堆。</p>
+<p>题目连接如下：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/sliding-window-maximum/">求滑动窗口的最大值</a><br>题解里面有相应详细解题方法。</p>
+<h1 id="堆的定义"><a href="#堆的定义" class="headerlink" title="堆的定义"></a>堆的定义</h1><ul>
+<li>堆就是一个二叉树，而且是一个完全二叉树（<a target="_blank" rel="noopener" href="https://www.cnblogs.com/-citywall123/p/11788764.html">各种树的定义</a>）</li>
+<li>堆的某个节点总是不大于或者不小于父节点</li>
+<li>当所有节点都大于等于他的父节点，可想而知，根节点一定是最小的。称为小根堆。</li>
+<li>当所有节点都小于等于他的父节点，根节点值最大，称为大根堆<h1 id="堆的实现方法"><a href="#堆的实现方法" class="headerlink" title="堆的实现方法"></a>堆的实现方法</h1></li>
+</ul>
+<p><strong>通过堆的排序来实现大根或者小根堆</strong><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/chengxiao/p/6129630.html">堆排序图解</a></p>
+<p><em>我就是白嫖之王。</em></p>
+<p>主要算法步骤</p>
+<ol>
+<li>筛选：主要是看一个树结构的三个节点（一个父节点和两个子节点）他们是否满足子节点<strong>不大于</strong>或者<strong>不小于</strong>父节点的条件。如果不满足的话就改变父子顺序，让他满足条件。这样又会出现问题，当改变顺序又会使<strong>下面的树</strong>结构不满足条件。再次改变，直到所有的都符合要求。（为了严谨，我们需要从下往上一次筛选，再一次从上到下筛选。就像是一个最大值从树的下面<strong>依次往上面挤</strong>，直到挤到根节点的位置（大根堆））</li>
+<li>交换（出堆）：将根节点和最下面最左边的值交换。</li>
+</ol>
+<h1 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h1><p>主要参考自李春葆的数字结构教程，要我自己硬写出来我实力不太够。</p>
+<p><strong>1. 大根堆的筛选</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">shift</span><span class="params">(Type R[],<span class="keyword">int</span> low,<span class="keyword">int</span> high)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	*class Type</span></span><br><span class="line"><span class="comment">	*&#123;</span></span><br><span class="line"><span class="comment">	*	key: 关键字-&gt;就是用来比较大小</span></span><br><span class="line"><span class="comment">	*&#125;</span></span><br><span class="line"><span class="comment">	*low和high代表着在R上，从low到high都要满足条件，</span></span><br><span class="line"><span class="comment">	*这里的R数组，他的下标意义对应着一个节点，把二叉树从左到右，从上到下，依次对应0-n。</span></span><br><span class="line"><span class="comment">	*/</span></span><br><span class="line">	<span class="keyword">int</span> i=low,j=low*<span class="number">2</span>;<span class="comment">//由于是完全二叉树，所以R[j]对应着R[i]的左节点，R[j+1]对应着右节点。</span></span><br><span class="line">	Type temp=R[i];</span><br><span class="line">	<span class="keyword">while</span>(j&lt;high)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(j&lt;high&amp;&amp;R[j].key&lt;R[j+<span class="number">1</span>].key)</span><br><span class="line">			j++;<span class="comment">//左节点小于右节点，就让j指向右节点。</span></span><br><span class="line">		<span class="keyword">if</span>(temp.key&lt;R[j].key)</span><br><span class="line">		&#123;</span><br><span class="line">			R[i]=R[j];<span class="comment">//根节点的值小于子节点，就直接交换。</span></span><br><span class="line">			i=j;<span class="comment">//然后向下面筛选，直到到达指定的high。</span></span><br><span class="line">			j=<span class="number">2</span>*i;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">break</span>;<span class="comment">//根节点大于等于最大孩子关键字，结束</span></span><br><span class="line">	&#125;</span><br><span class="line">	R[i]=temp;<span class="comment">//一次归位一个节点，然后从最后一个父节点开始，反复筛选，直到最后都符合要求。</span></span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	for(int i=n/2;i&gt;=1;i--)//n/2就是最后一个父节点。依次往上走。</span></span><br><span class="line"><span class="comment">	&#123;</span></span><br><span class="line"><span class="comment">		shift(R,i,n);</span></span><br><span class="line"><span class="comment">	&#125;</span></span><br><span class="line"><span class="comment">	*/</span></span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>2. 大根堆的交换</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">HeapSort</span><span class="params">(Type R[],<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=n/<span class="number">2</span>;i&gt;=<span class="number">1</span>;i--)<span class="comment">//建立初始的堆</span></span><br><span class="line">	&#123;</span><br><span class="line">		shift(R,i,n);<span class="comment">//从最后一个父节点依次往上面筛选。</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=n;i&gt;=<span class="number">2</span>;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		swap(R[<span class="number">1</span>],R[i]);<span class="comment">//把最后一个元素和根R[0]交换</span></span><br><span class="line">		shift(R,<span class="number">1</span>,i<span class="number">-1</span>);<span class="comment">//然后R[i]就像是出堆了一样（出了一个最大的），不再管它，对R[1...i-1]进行筛选。</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/01/03/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A0%86/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-UTF-8和Unicode简述" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -468,7 +535,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2020 John Doe
+    		&copy; 2021 John Doe
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
